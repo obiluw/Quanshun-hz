@@ -1,0 +1,48 @@
+body {
+    color: #000;
+    font-size: 12px;
+    font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
+    margin:0;
+    padding:0;
+}
+p {display:inline-block;color:black;}
+a{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
+}
+li:hover{
+    cursor: pointer;
+}
+/*覆盖bootstrap的样式*/
+.nav-list,.nav-list li a{
+    padding: 0px;
+    margin: 0px;
+}
+/*样式变化 CLASS*/
+.nav_add{
+    background:url('../images/nav-add.png') left center no-repeat;            padding-left: 25px;
+  }
+.nav_remove{
+    background:url('../images/nav-remove.png') left center no-repeat;
+    padding-left: 25px;
+}
+.nav_left{
+    background: url('../images/nav-left.png') left center no-repeat;
+    padding-left: 15px;
+    margin-left: 25px;
+}
+.nav_down{
+    background: url('../images/nav-down.png') left center no-repeat;
+    padding-left: 15px;
+    margin-left: 25px;
+}
+
+iframe{
+    width: 100%;
+    height:auto;
+    border:1px solid #ddd;
+}
+
+

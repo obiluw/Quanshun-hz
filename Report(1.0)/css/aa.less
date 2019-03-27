@@ -1,0 +1,180 @@
+//less 设计
+.transition-all (@time){
+  -webkit-transition:all @time ease-in-out;
+  -moz-transition: all @time ease-in-out;
+}
+
+body{
+  background-color:#F6F6F6 ;
+  ul,li{
+    list-style-type:none;
+    padding:0;
+    margin:0;
+  }
+}
+//页头
+header{
+  background-color:#fff;
+  padding:9px 0;
+  font-size:16px;
+  .container>div{
+    float:right;
+    div{float:right;}
+  }
+}
+//内容
+section{
+  height:auto;
+  -moz-box-shadow:0px 2px 7px #ddd inset;
+  -webkit-box-shadow:0px 2px 7px #ddd inset;
+  box-shadow:0px 2px 7px #ddd inset;
+  overflow: hidden;
+  >div{overflow: hidden;}
+  .sidebar-menu {
+    a{color:black}
+    .sidebar-collapse{
+      border:1px solid #ddd;
+    }
+    .report{
+      height:55px;
+      line-height:55px;
+      text-align: center;
+      background:#2D89EE;
+      font-size: 18px;
+      color:white;
+      margin-bottom: 25px;
+    }
+    .nav_retract{
+      z-index: 200;
+      background:url('../images/nav_retract.png') left center no-repeat;
+      height:30px;
+      width:25px;
+      position: absolute;
+      right:5px;
+      top:50%;
+      cursor: pointer;
+      padding:0 0 0 20px;
+      opacity: .7;
+      .transition-all (0.2s)
+    }
+    .nav_retract:hover{
+      opacity: 1;
+    }
+    .nav{
+      .nav-third-level{
+        a{padding-left: 40px;}
+      }
+    }
+  }
+  aside{
+    padding:20px 0 0 10px;
+    .top {
+      position:relative;
+      border: 1px solid #ddd;
+      border-bottom: none ;
+      background-color: #fff;
+      font-size: 14px;
+      height: 38px;
+      line-height:38px;
+      >a{
+        position: absolute;
+        right:0;
+        top:0;
+        margin-right:8px;
+        b{
+          height:13px;
+          width:13px;
+          display:inline-block;
+          background: url('../images/full_big.png') left center no-repeat;
+        }
+      }
+      >ul{
+        overflow: hidden;
+        height:38px;
+        border-bottom: 1px solid #F78B03;
+        li{
+          float:left;
+          p{
+            margin:0 auto;
+          }
+        }
+      }
+      >div{
+        float:left;
+      }
+    }
+    .bottom{
+      height: auto;
+    }
+  }
+}
+
+//页脚
+footer{
+  text-align: center;
+  background-color: #aaa;
+  >div{
+    margin:0 auto;
+    width:200px;
+    padding-left:35px;
+    height:40px;
+    background: url('../images/logo.png') left center no-repeat;
+    >div{
+      text-align: left;
+      float:left;
+      margin:5px 0px;
+    }
+  }
+  h4{
+    padding:0;
+    margin:0;
+    font-size:12px;
+  }
+}
+
+
+//高亮
+
+.now {
+  width: 150px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  display: block;
+  position: relative;
+  >b{
+    position: absolute;
+    display: inline-block;
+    margin-left:-18px;
+    top:10px;
+    width: 18px;
+    height: 16px;
+    background: url('../images/star-02.png') left center no-repeat;
+  }
+  span{
+    position: absolute;
+    margin-left:3px;
+    top:13px;
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: url('../images/close-1.png') left center no-repeat;
+  }
+}
+//tab选项卡样式切换
+.active{
+    background-color:#F78B03;
+    span{
+      background: url('../images/close-2.png') left center no-repeat;
+    }
+    b{background: url('../images/star-01.png') left center no-repeat;}
+    p{ color: #ffffff;}
+}
+//星星点亮
+.star_h{
+  background: url('../images/star-03.png') left center no-repeat !important;
+}
+//左侧隐藏 图标切换
+.nav_retract_transform{
+  left:5px !important;
+  background: url('../images/nav_push.png') left center no-repeat !important;
+}
