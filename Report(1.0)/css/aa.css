@@ -1,0 +1,171 @@
+body {
+  background-color: #F6F6F6 ;
+}
+body ul,
+body li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+header {
+  background-color: #fff;
+  padding: 9px 0;
+  font-size: 16px;
+}
+header .container > div {
+  float: right;
+}
+header .container > div div {
+  float: right;
+}
+section {
+  height: auto;
+  -moz-box-shadow: 0px 2px 7px #ddd inset;
+  -webkit-box-shadow: 0px 2px 7px #ddd inset;
+  box-shadow: 0px 2px 7px #ddd inset;
+  overflow: hidden;
+}
+section > div {
+  overflow: hidden;
+}
+section .sidebar-menu a {
+  color: black;
+}
+section .sidebar-menu .sidebar-collapse {
+  border: 1px solid #ddd;
+}
+section .sidebar-menu .report {
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  background: #2D89EE;
+  font-size: 18px;
+  color: white;
+  margin-bottom: 25px;
+}
+section .sidebar-menu .nav_retract {
+  z-index: 200;
+  background: url('../images/nav_retract.png') left center no-repeat;
+  height: 30px;
+  width: 25px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  cursor: pointer;
+  padding: 0 0 0 20px;
+  opacity: .7;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+}
+section .sidebar-menu .nav_retract:hover {
+  opacity: 1;
+}
+section .sidebar-menu .nav .nav-third-level a {
+  padding-left: 40px;
+}
+section aside {
+  padding: 20px 0 0 10px;
+}
+section aside .top {
+  position: relative;
+  border: 1px solid #ddd;
+  border-bottom: none ;
+  background-color: #fff;
+  font-size: 14px;
+  height: 38px;
+  line-height: 38px;
+}
+section aside .top > a {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 8px;
+}
+section aside .top > a b {
+  height: 13px;
+  width: 13px;
+  display: inline-block;
+  background: url('../images/full_big.png') left center no-repeat;
+}
+section aside .top > ul {
+  overflow: hidden;
+  height: 38px;
+  border-bottom: 1px solid #F78B03;
+}
+section aside .top > ul li {
+  float: left;
+}
+section aside .top > ul li p {
+  margin: 0 auto;
+}
+section aside .top > div {
+  float: left;
+}
+section aside .bottom {
+  height: auto;
+}
+footer {
+  text-align: center;
+  background-color: #aaa;
+}
+footer > div {
+  margin: 0 auto;
+  width: 200px;
+  padding-left: 35px;
+  height: 40px;
+  background: url('../images/logo.png') left center no-repeat;
+}
+footer > div > div {
+  text-align: left;
+  float: left;
+  margin: 5px 0px;
+}
+footer h4 {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+.now {
+  width: 150px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  display: block;
+  position: relative;
+}
+.now > b {
+  position: absolute;
+  display: inline-block;
+  margin-left: -18px;
+  top: 10px;
+  width: 18px;
+  height: 16px;
+  background: url('../images/star-02.png') left center no-repeat;
+}
+.now span {
+  position: absolute;
+  margin-left: 3px;
+  top: 13px;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background: url('../images/close-1.png') left center no-repeat;
+}
+.active {
+  background-color: #F78B03;
+}
+.active span {
+  background: url('../images/close-2.png') left center no-repeat;
+}
+.active b {
+  background: url('../images/star-01.png') left center no-repeat;
+}
+.active p {
+  color: #ffffff;
+}
+.star_h {
+  background: url('../images/star-03.png') left center no-repeat !important;
+}
+.nav_retract_transform {
+  left: 5px !important;
+  background: url('../images/nav_push.png') left center no-repeat !important;
+}
