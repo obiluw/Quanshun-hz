@@ -1,0 +1,62 @@
+<!doctype HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> new document</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		svg{
+			background:#eee;
+		}
+	</style>
+</head>
+<body>
+	<svg id='s1' width='100%' height='800'>
+		
+	</svg>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+	
+	setInterval(function(){
+	
+	var 
+	c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+	s1.appendChild(c);
+	
+
+	c.setAttribute('r',rn(0,100));
+	c.setAttribute('cx',rn(100,1400));
+	c.setAttribute('cy',rn(100,500));
+	c.setAttribute('fill',rc(50,160));
+	
+	//console.log(c.baseVal.'cx');
+	function rn(a,b){
+		return Math.floor(Math.random()*(b-a+1)+a)
+	}
+	function rc(){
+		var r=Math.floor(Math.random()*256)
+		var g=Math.floor(Math.random()*256)
+		var b=Math.floor(Math.random()*256)
+		return 'rgb('+r+','+g+','+b+')';
+	}
+	
+	setInterval(function(){
+		c.setAttribute('cx',rn(100,1400));
+		c.setAttribute('cy',rn(100,500));
+
+		setTimeout(function(){
+			c.style.opacity='0';			//CSS3高级
+			c.style.transition='all 3s'
+
+		},1)
+	},1000)
+	
+	
+
+	},1000
+	)
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>报表中心</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        h4{margin:5px 0 0 !important;font-weight: 500; }
+        ul,li{list-style: none;padding:0;margin:0;}
+        body{
+            padding: 20px 10px;
+            margin:0;
+            background-color:white;
+        }
+        .main {
+            border: 1px solid #ddd;
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+        .main .main-top {
+            padding: 0 15px;
+            background-color: #F6F6F6;
+            height: 40px;
+            line-height: 40px;
+        }
+        .main .main-top span {
+            font-size: 16px;
+        }
+        .main .main-top a {
+            font-size: 14px;
+            float: right;
+        }
+        .main .main-content{
+            min-height: 180px;
+        }
+        .main .main-content .add-block {
+            background: url(images/stat_add.png) no-repeat center;
+            float: left;
+            height: 100px;width: 100px;
+            border: none;
+        }
+        .main .main-content .main-report {
+            float: left;
+            display: table;
+            height: 100px;
+            width: 100px;
+            position: relative;
+        }
+        .main .main-content .main-report > div {
+            vertical-align: middle;
+            display: table-cell;
+        }
+        .main .main-content .main-report > div img {
+            display: block;
+            margin: 0 auto;
+        }
+        .main .main-content .main-report > div h4 {
+            font-size: 14px;
+            text-align: center;
+            overflow:hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width:100px;
+        }
+        .main .main-content .main-report span {
+            position: absolute;
+            opacity: 1;
+            right: 21px;
+            top:7px;
+        }
+        .main .main-content:before {
+            content: ' ';
+            display: table;
+        }
+        .main .main-content:after {
+            content: ' ';
+            display: table;
+            clear: both;
+        }
+        .modal-body{
+            overflow: hidden;
+        }
+        .search_report{
+            overflow: hidden;
+            float:left;
+        }
+        .search_report li{
+            float:left;
+            padding: 10px 10px 10px 0;
+        }
+    </style>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="main">
+            <div class="main-top">
+                <span>我关注的报表</span>
+                <a href="javascript:void(0)">编辑</a>
+            </div>
+            <div class="main-content">
+                <!-- Button trigger modal -->
+                <div type="button" class="btn btn-primary btn-lg add-block" data-toggle="modal" data-target="#myModal">
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">添加到我关注的报表</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+                                    </div><!-- /input-group -->
+                                </div><!-- /.col-lg-6 -->
+                                <ul class="search_report">
+                                    <li>出口商品统计</li>
+                                    <li>出口国别统计</li>
+                                    <li>出口部门</li>
+                                    <li>商品-分商品国别查询</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary">收藏</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-top">
+                <span>最近查看报表</span>
+            </div>
+            <div class="main-content">
+            </div>
+        </div>
+    </div>
+    <script>
+        //添加报表
+        /*
+        $('.add-block').click(function(){
+            var $div = $(this);
+            var $block = $(' <div data-trigger="close" class="block main-report" ><div class="main-report1"><img src="images/stat.png"             alt=""/><h4>出口商品统计 </h4></div></div> ');
+            //编辑后 禁止再添加
+            if($(".main-report>.close").length){
+                return ;
+            }else{ $div.parent().prepend($block);}
+        });
+        */
+
+        //模态框添加收藏
+        $('.search_report li').click(function(){
+            var $div = $(this);
+            var Name = $(this).text();
+            var $block = $(' <div data-trigger="close" class="block main-report"  title="'+Name+'"><div class="main-report1"><img  src="images/stat.png" alt=""/><h4>' + Name + '</h4></div></div> ');
+            //编辑后 禁止再添加
+            if($(".main-report>.close").length||$(".main-report1").length>20){
+                alert("不能编辑了哦");
+                return ;
+            }else{ $('.main-content:first').prepend($block);}
+        });
+
+        /*
+        $('.main-top>a').click(function(){
+
+
+        });
+         */
+
+
+
+        //编辑报表 --编辑/取消编辑
+        $('.main-top>a').click(function(){
+
+            //奇偶按钮功能
+            if(this.chk){
+                $('.main-top>a').text('编辑');
+                $('.main-report').each(function(){
+                    this.el.remove();
+                });
+                $('.add-block').attr("disabled",false);
+            }else{
+                var $add_close=$('<span class="close"><img src="images/remove.png"  /></span>');
+                //判断 报表存在否
+                if($('.main-report').length>=0){
+                    //为每个添加关闭按钮
+                    $('.main-report').each(function(){
+                        this.el=$add_close.clone();
+                        $(this).prepend(this.el)
+                    });
+                    $('.main-top>a').text('取消编辑');
+                }
+                $('.add-block').attr("disabled",true);
+            }
+            this.chk=!this.chk;
+            $('.main-report>span').click(function(){
+                $(this).parent().remove(); //删除当前选定的元素
+            });
+
+        });
+
+    </script>
+</body>
+</html>
