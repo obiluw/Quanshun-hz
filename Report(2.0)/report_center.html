@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>报表中心</title>
+    <style>
+        h4{margin:0 0 !important;font-weight: 500; }
+        h3{margin:0 0 !important;font-weight: 500; }
+        ul,li{list-style: none;padding:0;margin:0;}
+        .hide{display: none}
+        .show{display: block}
+        .v-hide{visibility: hidden;}
+        body{
+            padding: 20px 0px;
+            margin:0;
+            background-color:white;
+            font-family: "Microsoft YaHei UI";
+            /*文字不能选中*/
+            -moz-user-select:none;/*火狐*/
+            -webkit-user-select:none;/*webkit浏览器*/
+            -ms-user-select:none;/*IE10*/
+            -khtml-user-select:none;/*早期浏览器*/
+            user-select:none;
+        }
+        .main {
+            border: 1px solid #c0d1e0;
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+        .main .main-top {
+            padding: 0 15px;
+            background-color: #e1eaf2;
+            height: 40px;
+            line-height: 40px;
+            border-bottom:1px solid #c0d1e0;
+        }
+        .main .main-top .main-top_h {
+            background: url(images/Start_big.png) no-repeat left;
+        }
+        .main .main-top .main-top_d {
+            background: url(images/Time.png) no-repeat left;
+        }
+        .main .main-top span {
+            font-size: 16px;
+            padding-left:25px;
+            cursor: default;
+        }
+        .main .main-top a {
+            font-size: 16px;
+            float: right;
+            text-decoration: none !important;
+            color:#f78b03;
+        }
+        .main .main-top .close{
+            padding-left: 22px;
+            background: url(images/close_1.png) no-repeat left;
+        }
+        .main .main-content{
+            min-height: 180px;
+            padding:20px;
+        }
+        .main .main-content .add-block {
+            background: url(images/add_big.png) no-repeat center;
+            float: left;
+            height: 100px;width: 100px;
+            border: none;
+            cursor: pointer;
+            margin:6px;
+        }
+        .main .main-content .main-report {
+            float: left;
+            display: table;
+            height: 100px;
+            width: 100px;
+            position: relative;
+            border: 1px dotted #ccc;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .main .main-content .main-report .main-report1{
+            transition: hover .1s linear;
+            height: 100px;
+            background: url("images/report.png") no-repeat 26px 15px;
+        }
+        .main .main-content .main-report .main-report1:hover {
+            background: url("images/report_h.png") no-repeat 26px 15px;
+            color:#3ea4d4;
+        }
+        .main .main-content .main-report > div h4 {
+            font-size: 12px;
+            text-align: center;
+            overflow:hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width:100px;
+            position: absolute;
+            height:20px;
+            line-height:20px;
+            bottom: 8px;
+        }
+        .main .main-content .main-report span {
+            position: absolute;
+            opacity: 1;
+            right: -8px;
+            top: -9px;
+            z-index: 999;
+        }
+        .main .main-content:before {
+            content: ' ';
+            display: table;
+        }
+        .main .main-content:after {
+            content: ' ';
+            display: table;
+            clear: both;
+        }
+        .modal-body{
+            overflow: hidden;
+        }
+        .search_report{
+            float:left;
+            width:100%;
+        }
+        .search_report li{
+            float: left;
+            padding: 0 0 !important;
+            width: 100px;
+            margin-bottom: 15px;
+            margin-right: 5px;
+        }
+        .search_report li .main-report{
+            margin: 0 0 !important;
+        }
+
+        /* 定义模态对话框外面的覆盖层样式 */
+        #modal-overlay {
+            visibility: hidden;
+            position: fixed;   /* 使用绝对定位或固定定位  */
+            left: 0px;
+            top: 0px;
+            width:100%;
+            height:100%;
+            z-index: 999;
+        }
+        .modal-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        /* 模态框样式 */
+        .modal-data{
+            position: absolute;
+            z-index: 999;
+            left: 50%;
+            top: 2%;
+            width: 540px;
+            margin: 0 0 0 -300px;
+            border: 1px solid #838383;
+            padding: 30px;
+            background: #f3f7fb;
+            height: 345px;
+        }
+        .modal-header{
+            overflow: hidden;
+        }
+        .modal-header a{
+            text-decoration:none;
+            font-size: 14px;
+            right:0;top:0;
+            position: absolute;
+            color:#fff;
+            display: inline-block;
+            background: #979797;
+            width: 70px;
+            height: 30px;line-height: 30px;
+            text-align: center;
+
+        }
+        .modal-header a span{
+            width: 100%;
+            height: 100%;
+            background: url(images/close_alert.png) no-repeat 8px;
+            display: inline-block;
+            padding-left: 7px;
+        }
+        .modal-header h3{
+            float:left;
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+        .modal-body{
+            min-height:150px;
+            overflow-y:auto;
+            margin-top:15px;
+        }
+
+    /* 2017-1-6 */
+        .content{
+            padding: 0 20px;
+        }
+        /* 弹出框 */
+        .input-group {
+            position: relative;
+            width: 100%;
+            height: 30px;
+        }
+        .input-group input{
+            padding-left: 12px;
+            height: 24px;
+            font-size: 14px;
+            font-family: "Microsoft YaHei UI";
+            width: 200px;
+        }
+        .input-group input:focus {
+            outline: 2px solid #3ea5d4;
+        }
+        .input-group .input-group-btn{
+            position: absolute;
+            height: 30px;
+
+        }
+        .input-group .input-group-btn a{
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+            font-size: 16px;
+            font-family: "Microsoft YaHei UI";
+        }
+        .modal-footer{
+            position: absolute;
+            margin-top: 15px;
+            height: 38px;
+            width: 114px;
+            right: 40px;
+        }
+        .modal-footer .button{
+            font-size: 18px;
+            font-family: "Microsoft YaHei UI";
+            padding: 7.5px 21px;
+            background: #f78b03;
+            background: -webkit-gradient(linear, left top, left bottom, from(#f78b03), to(#f78b03));
+            background: -webkit-linear-gradient(top, #f78b03, #f78b03);
+            background: -moz-linear-gradient(top, #f78b03, #f78b03);
+            background: -ms-linear-gradient(top, #f78b03, #f78b03);
+            background: -o-linear-gradient(top, #f78b03, #f78b03);
+
+        }
+        .modal-footer .button:hover {
+            border-top-color: #f28d11;
+            background: #f28d11;
+            color: #f5f5f5;
+        }
+        .modal-footer .button:active {
+            border-top-color: #ff8c00;
+            background: #ff8c00;
+        }
+        /* 弹出框外框 */
+        .search_report_list{
+            height:234px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        /* 弹出框滚动轴 */
+        .divScroll_md div{background-color:#e1eaf2; position:absolute; left:0px; top:0px;}
+        .divScroll_sm {z-index: 9999;height: 250px !important;top: 114px !important;}
+        .divScroll_sm .active{ display: none !important; }
+        .divScroll_sm div{background-color:#b4cce0; position:absolute; left:0px; top:0px;}
+        .divScroll_lg div{background-color:#000001; position:absolute; left:0px; top:0px;}
+        /* button样式 */
+        .button {
+            cursor: pointer;
+            background: #3ea5d4;
+            background: -webkit-gradient(linear, left top, left bottom, from(#3ea5d4), to(#3ea5d4));
+            background: -webkit-linear-gradient(top, #3ea5d4, #3ea5d4);
+            background: -moz-linear-gradient(top, #3ea5d4, #3ea5d4);
+            background: -ms-linear-gradient(top, #3ea5d4, #3ea5d4);
+            background: -o-linear-gradient(top, #3ea5d4, #3ea5d4);
+            padding: 5px 17px;
+            color: #ffffff;
+            font-size: 11px;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+        .button:hover {
+            border-top-color: #3ea5d4;
+            background: #3ea5d4;
+            color: #f5f5f5;
+        }
+        .button:active {
+            border-top-color: #58aed6;
+            background: #58aed6;
+        }
+        /* 警告框 */
+        .alert{
+            width:180px;
+            height:105px;
+            border:1px solid #3ea4d4;
+            position: absolute;
+            z-index: 999;
+            left: 50%;
+            top: 13%;
+            margin: 0px 0 0 -90px;
+            display:none;
+        }
+        .alert_head{
+            color:#fff;
+            font-size: 16px;
+            background: #3ea4d4;
+            padding:0 10px;
+            height:35px;
+            line-height: 35px;
+            position: relative;
+        }
+        .alert_head p{
+            height: 35px;
+            margin: 0;
+            padding: 0;
+        }
+        .alert_head span{
+            background: url(images/close_alert.png) no-repeat center;
+            height: 16px;
+            width: 14px;
+            position: absolute;
+            right: 12px;
+            top: 8px;
+            cursor: pointer;
+        }
+        .alert_body{
+            background: #fff;
+            color:#040404;
+            font-size: 16px;
+            text-align: center;
+            height:70px;
+            line-height: 70px;
+        }
+        .alert_body p{
+            margin: 0;
+            height: 100%;
+            padding: 5px 6px 0px 6px;
+            margin: 0px;
+            height: 65px;
+            line-height: 33px;
+            font-size: 15px;
+        }
+    </style>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jsScroll.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="main">
+            <div class="main-top">
+                <span class="main-top_h">我关注的报表</span>
+                <a href="javascript:void(0)" >编辑</a>
+            </div>
+            <div class="main-content">
+                <!-- Button trigger modal -->
+                <div type="button" class="btn btn-primary btn-lg add-block" onclick="overlay()">
+                </div>
+                <!-- Modal -->
+                <div id="modal-overlay">
+                    <div class="modal-mask"></div>
+                    <div class="modal-data">
+                        <div class="modal-header">
+                            <h3>添加到我关注的报表 </h3>
+                            <a onclick="overlay()" href="#">
+                                <span>关闭</span>
+                            </a>
+                        </div>
+
+                        <div class="modal-body">
+                            <div >
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入报表名...">
+      <span class="input-group-btn">
+        <a class="button   btn btn-default" type="button">搜索</a>
+      </span>
+                                </div><!-- /input-group -->
+                            </div>
+                            <div class="search_report_list">
+                                <ul class="search_report">
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>出口商品统计</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>出口商品统计</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>出口商品统计</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>出口国别统计</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>出口部门</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="block main-report" title="出口国别统计">
+                                            <div class="main-report1">
+                                                <h4>商品-分商品国别查询</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="button    btn btn-primary">确认添加</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-top">
+                <span class="main-top_d">最近查看报表</span>
+            </div>
+            <div class="main-content">
+            </div>
+        </div>
+    </div>
+
+    /* 1.11 警告框 */
+    <div class="alert">
+        <div class="alert_head">
+            <p>提示框</p>
+            <span></span>
+        </div>
+        <div class="alert_body">
+            <p>已收藏</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //模态框添加收藏
+        $('.search_report li').click(function(){
+            var $div = $(this);
+            var Name = $(this).text();
+            var $block = $(' <div class="block main-report"  title="'+Name+'"><div class="main-report1"><h4>' + Name + '</h4></div></div> ');
+            //编辑后 禁止再添加
+            if($(".main-report>.close").length||$(".main-report1").length>20){
+                alert("不能编辑了哦");
+                return ;
+            }else{ $('.main-content:first').prepend($block);}
+        });
+
+
+
+
+        //编辑报表 --编辑/取消编辑
+        $('.main-top').on("click", 'a',function(){
+            //奇偶按钮功能
+            if(this.chk){
+                $('.main-top>a').text('编辑').removeClass("close");
+                $('.main-report').each(function(){
+                    this.el.remove();
+                });
+                $('.add-block').removeClass('v-hide');
+            }else{
+                var $add_close=$('<span class="close"><img src="images/close_report.png"  /></span>');
+                //判断 报表存在否
+                if($('.main-report').length>=0){
+                    //为每个添加关闭按钮
+                    $('.main-report').each(function(){
+                        this.el=$add_close.clone();
+                        $(this).prepend(this.el)
+                    });
+                    $('.main-top>a').text('取消编辑').addClass("close");;
+                }
+                $('.add-block').addClass('v-hide');
+            }
+            this.chk=!this.chk;
+            $('.main-report>span').click(function(){
+                $(this).parent().remove(); //删除当前选定的元素
+            });
+
+        });
+
+        //模态框显示
+        function overlay(){
+            var e1 = document.getElementById('modal-overlay');
+            e1.style.visibility =  (e1.style.visibility == "visible"  ) ? "hidden" : "visible";
+            if( e1.style.visibility == "visible" ){
+                $(".divScroll_sm div").removeClass("active");
+            }else{
+                $(".divScroll_sm div").addClass("active");
+            }
+        }
+
+        //模态框选中报表 样式改变
+        $('.modal-body li').click(function(){
+            $(this).toggleClass('modal-body-active');
+        })
+    </script>
+    <script type="text/javascript">
+        //设置高度
+        var sh=$(window).height()-20;
+        function height(sh){
+            $('.content').css('height',  sh+'px');
+        }
+        (height(sh));
+        $(window).resize(function() {
+            var sh=$(window).height()-20;
+            height(sh);
+        });
+    </script>
+    <script type="text/javascript">
+        jsScroll(document.getElementsByClassName('content')[0], 7, 'divScroll_md');
+        jsScroll(document.getElementsByClassName('search_report_list')[0], 7, 'divScroll_sm');
+        $(".divScroll_sm div").addClass("active");
+
+    </script>
+</body>
+</html>
