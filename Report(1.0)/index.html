@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>统计报表</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/aa.css" rel="stylesheet">
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+
+<header >
+    <div class="container">
+        <div class="col-sm-10" >
+            <div>
+                <a href="">aaa123</a>
+                <span>,欢迎回来  xxx有限公司  xx部门</span>
+                <a href="">退出</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section >
+    <div class="container">
+        <!--左侧-->
+        <nav class="sidebar-menu col-md-2 col-sm-3" >
+            <div class="sidebar-collapse">
+                <div class="report">
+                    <span><img src="images/nav_side.png" alt=""/></span>
+                    统计报表
+                </div>
+                <div class="nav_retract"></div>
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="nav-label nav_add">销售报表</span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" >
+                            <li>
+                                <a  href="javascript:void(0)" data-index="0">
+                                    <span class="nav_left">一部</span>
+
+                                </a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li>
+                                        <a class="J_menuItem" href="show.html">出口商品统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="show.html">出口国别统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口部门</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a  href=".html">
+                                    <span class="nav_left"></span>
+                                    二部
+                                </a>
+                            </li>
+                            <li>
+                                <a  href=".html">
+                                    <span class="nav_left"></span>
+                                    三部
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="nav_add"></span>
+                            <span class="nav-label">成本报表</span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href=".html" data-index="0">
+                                    <span class="nav_left"></span>
+                                    一部
+                                </a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口商品统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口国别统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口部门</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href=".html">
+                                    <span class="nav_left"></span>
+                                    二部
+                                </a>
+                            </li>
+                            <li>
+                                <a href=".html">
+                                    <span class="nav_left"></span>
+                                    三部
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="nav_add"></span>
+                            <span class="nav-label">利润报表</span>
+                        </a>
+                        <ul class="nav nav-second-level collapse ">
+                            <li>
+                                <a class="J_menuItem" href=".html" data-index="0">
+                                    <span class="nav_left"></span>
+                                    一部
+                                </a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口商品统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口国别统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口部门</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="javascript:void(0)" data-index="0">
+                                    <span class="nav_left"></span>
+                                    二部
+                                </a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口商品统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口国别统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href=".html">出口部门</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href=".html">
+                                    <span class="nav_left"></span>
+                                    三部
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--右侧-->
+        <aside class="col-md-10 col-sm-9">
+            <div class=" top">
+                <ul>
+                    <li ><a class="now active">
+                        <p>报表中心</p>
+                    </a></li>
+                </ul>
+                <a href="javascript:void(0)">
+                    全屏
+                    <b></b>
+                </a>
+            </div>
+            <div class="bottom">
+                <iframe src="report_center.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" "></iframe>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<footer>
+    <div>
+            <div>
+                <h4>杭州全顺科技技术支持</h4>
+                <a href="www.tradeserving.com">www.tradeserving.com</a></li>
+            </div>
+    </div>
+</footer>
+<script type="text/javascript" src="js/index.js"  charset="gb2312"></script>
+
+
+
+</body>
+</html>
